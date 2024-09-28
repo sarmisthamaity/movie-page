@@ -1,0 +1,41 @@
+.container {
+    padding: 20px;
+    text-align: center;
+}
+
+.img-size {
+    height: 11rem;
+}
+
+.card-text {
+    margin-bottom: 0px !important;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    padding: 0;
+}
+
+.pagination .page-item {
+    margin: 0 5px;
+}
+
+.pagination .page-item .page-link {
+    padding: 8px 12px;
+    text-decoration: none;
+    color: #007bff;
+    border: 1px solid #dee2e6;
+    border-radius: 5px;
+}
+
+.pagination .page-item.active .page-link {
+    background-color: #007bff;
+    color: white;
+}
+
+.btn-primary {
+    background-color: navy;
+    border-radius: 25px;
+}
