@@ -1,14 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import "./css/index.css";
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from "react-toastify";
 import App from './App';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  // <React.StrictMode>
-  //   <App />
-  // </React.StrictMode>
   <>
+    <ToastContainer 
+      theme='red'
+      position="bottom-right"
+      autoClose={3000}
+      closeOnClick
+      pauseOnHover={false}
+    />
     <App />
   </>
 );

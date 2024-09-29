@@ -1,34 +1,24 @@
-import React, {useState} from 'react';
+import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import MovieList from "./components/MovieList";
+import Home from './pages/Home';
 import Navbar from './components/Navbar';
-import Signup from './components/Signup';
-import Login from './components/Login';
+import Signup from './pages/Signup';
+import Login from './pages/Login';
+// import RestrictedRoute from './components/RestrictedRoute';
 
 function App() {
 
-  const [searchTerm, setSearchTerm] = useState('');
-  const [submittedSearchTerm, setSubmittedSearchTerm] = useState('');
-
-  // Handle search input
-  const handleSearch = (term) => {
-    // console.log(term, 'in app file');
-    
-    setSearchTerm(term);
-  };
-
   return (
     <Router>
-      <div>
-        <Navbar onSearch={handleSearch}/>
+        <Navbar />
         <Routes>
-          <Route path="/" element={<MovieList searchTerm={searchTerm}/>} />
+          <Route path="/" element={<Home />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
-
+          {/* <RestrictedRoute path="/" element={<Home />}/> */}
         </Routes>
-      </div>
     </Router>
+    
   );
 }
 

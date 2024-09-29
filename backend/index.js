@@ -1,8 +1,12 @@
+require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const fs = require("fs")
 const path = require('path');
-require('dotenv').config();
+const router = require('./router/index');
+
+const app = express();
+const port = process.env.PORT;
 
 const directoryPath = path.join(__dirname);
 const filePath = path.join(directoryPath, 'userdetails.json');
@@ -11,17 +15,12 @@ if (!fs.existsSync(filePath)) {
     fs.writeFileSync(filePath, JSON.stringify({"user": []}));
 }
 
-const router = require('./router/index');
-const app = express();
 
 app.use(express.json());
 app.use(cors());
 
-const port = process.env.PORT;
-
-// Define a route for the root URL
 app.get('/', (req, res) => {
-    res.send('Hello, World!');
+    return res.send('Hello, World!');
 });
 
 app.use('/', router);

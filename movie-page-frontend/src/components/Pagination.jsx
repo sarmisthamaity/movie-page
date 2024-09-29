@@ -1,40 +1,38 @@
 import React from 'react';
-import "../css/pagination.css"
-const Pagination = ({ moviesPerPage, totalMovies, paginate, currentPage, prevPage, nextPage, goToPage, adjustedStartPage, endPage }) => {
+import "../css/pagination.css";
+
+const Pagination = ({ moviesPerPage, totalMovies, paginate, currentPage }) => {
   const pageNumbers = [];
+  const totalPages = Math.ceil(totalMovies / moviesPerPage);  
+
+  for (let i = 1; i <= totalPages; i++) {
+    pageNumbers.push(i);
+  }
+  
 
   return (
     <nav>
       <ul className="pagination">
-        {pageNumbers.map(number => (
-          <li key={number} className={`page-item ${currentPage === number ? 'active' : ''}, btn-style`}>
-            <a onClick={() => paginate(number)} href="#!" className="page-link">
+        {currentPage > 1 && (
+          <li>
+            <button onClick={() => paginate(currentPage - 1)}>&#8592; prev</button>
+          </li>
+        )}
+
+        {pageNumbers.slice(Math.max(0, currentPage - 3), Math.min(totalPages, currentPage + 2)).map(number => (
+          <li key={number} className={number === currentPage ? 'active' : ''}>
+            <button onClick={() => paginate(number)}>
               {number}
-            </a>
+            </button>
           </li>
         ))}
+        {currentPage < totalPages && (
+          <li>
+            <button onClick={() => paginate(currentPage + 1)}
+              >next &#8594;</button>
+          </li>
+        )}
       </ul>
-
-      <div className="pagination-controls">
-        <button className="btn-size btn-style" onClick={prevPage} disabled={currentPage === 1}>
-          &#8592; prev
-        </button>
-
-        {Array.from({ length: endPage - adjustedStartPage + 1 }, (_, i) => (
-          <button
-            key={i}
-            onClick={() => goToPage(adjustedStartPage + i)}
-            className={currentPage === adjustedStartPage + i ? "active" : ""}
-          >
-            {adjustedStartPage + i}
-          </button>
-        ))}
-
-        <button className='btn-size btn-style' onClick={nextPage}
-          disabled={currentPage === Math.ceil(totalMovies.length / moviesPerPage)}>
-          next &#8594;
-        </button>
-      </div>
     </nav>
   );
 };

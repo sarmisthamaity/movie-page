@@ -1,18 +1,18 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import "../css/navbar.css";
 
-const Navbar = ({ onSearch }) => {
-  const [search, setSearch] = useState('');
+const Navbar = () => {
+  // const [search, setSearch] = useState('');
 
-  const handleInputChange = (e) => {
-    setSearch(e.target.value);
-  };
+  // const handleInputChange = (e) => {
+  //   setSearch(e.target.value);
+  // };
 
-  const handleSearchSubmit = (e) => {
-    e.preventDefault();
-    onSearch(search);
-  };
+  // const handleSearchSubmit = (e) => {
+  //   e.preventDefault();
+  //   onSearch(search);
+  // };
 
 
   return (
@@ -28,7 +28,7 @@ const Navbar = ({ onSearch }) => {
               <Link to="/" className="nav-link text-color-white active">Home</Link>
             </li>
           </ul>
-          <form className="d-flex" onSubmit={handleSearchSubmit}>
+          {/* <form className="d-flex" onSubmit={handleSearchSubmit}>
             <input
               className="form-control me-2"
               type="search"
@@ -38,7 +38,7 @@ const Navbar = ({ onSearch }) => {
               onChange={handleInputChange}
             />
             <button className="btn btn-outline-success text-color-white" type="submit">Search</button>
-          </form>
+          </form> */}
           <Link to="/signup" className="btn btn-outline-success me-2 text-color-white">Sign Up</Link>
           <Link to="/login" className="btn btn-outline-success text-color-white">Login</Link>
         </div>

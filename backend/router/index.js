@@ -1,6 +1,5 @@
 const router = require('express').Router();
 
-// const routes = require('./user.routes');
 const userRute = require("./userRoute");
 const mRoute = require("./movieRoute");
 
