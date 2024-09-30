@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
 
-
 const Filter = ({ onFilter }) => {
 
   const [ searchInput, setSearchInput ] = useState('');
   const [filters, setFilters] = useState({ genre: '', releaseYear: '', rating: '', title: '' });
-  // const [ratingInput, setRatingInput] = useState(0);
 
   const handleGenreChange = (e) => {
     setFilters({
@@ -60,9 +58,7 @@ const Filter = ({ onFilter }) => {
     // });
   };
 
-
   // console.log("searchInput", searchInput);
-  
   
   const handleChange = (e) => {
     e.preventDefault();
@@ -75,22 +71,7 @@ const Filter = ({ onFilter }) => {
       ...filters,
       title: searchInput
     });
-
-    // setSearchInput(" ");
-
   };
-
-  // const handleChangeRating = (e) => {
-
-  //   setFilters({
-  //       ...filters,
-  //       rating: ratingInput
-  //     });
-  //     onFilter({
-  //       ...filters,
-  //       rating: ratingInput
-  //     });
-  // }
 
   return (
     <div className="filters">
@@ -101,12 +82,13 @@ const Filter = ({ onFilter }) => {
         <option value="Biography">Biography</option>
         <option value="History">History</option>
         <option value="Fantasy">Fantasy</option>
+        <option value="Family">Family</option>
+        <option value="Romance">Romance</option>
+        <option value="Comedy">Comedy</option>
       </select>
 
       <input type="number" placeholder="Year" onChange={handleYearChange} />
-
       <input type="number" step="0.1" placeholder="Min IMDb Rating" onChange={handleRatingChange} />
-      {/* <button onClick={(e) => handleChangeRating(e)}>click</button> */}
 
       <input type="text" onChange={handleMovieTitleChange} placeholder="Search for movies..."/>
       <button onClick={(e) => handleChange(e)}>click</button>

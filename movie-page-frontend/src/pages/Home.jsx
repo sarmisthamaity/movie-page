@@ -9,12 +9,10 @@ const Home = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [moviesPerPage] = useState(4);
 
-  // Handle Filtering
   const handleFilter = (filters) => {
     // console.log("filters in home jsx file", typeof filters.rating);
     
     let updatedMovies = movies;
-
     if (filters.genre) {
       updatedMovies = updatedMovies.filter(movie =>
         movie.genres.includes(filters.genre)
@@ -34,7 +32,6 @@ const Home = () => {
         // console.log(typeof movie.imdb_rating, "movie.imdb_rating", movie.imdb_rating);
         // console.log(typeof filters.rating, "filters.rating", filters.rating);
         
-        
         return movie.imdb_rating >= filters.rating;
       });
     }
@@ -49,12 +46,7 @@ const Home = () => {
         }
         // return movieTitle === filterTitle;
       });
-
-
-      // console.log("updatedMovies", updatedMovies);
-      
-
-
+      // console.log("updatedMovies", updatedMovies);      
     }
 
     setFilteredMovies(updatedMovies);

@@ -3,17 +3,6 @@ import { Link } from 'react-router-dom';
 import "../css/navbar.css";
 
 const Navbar = () => {
-  // const [search, setSearch] = useState('');
-
-  // const handleInputChange = (e) => {
-  //   setSearch(e.target.value);
-  // };
-
-  // const handleSearchSubmit = (e) => {
-  //   e.preventDefault();
-  //   onSearch(search);
-  // };
-
 
   return (
 
@@ -28,17 +17,6 @@ const Navbar = () => {
               <Link to="/" className="nav-link text-color-white active">Home</Link>
             </li>
           </ul>
-          {/* <form className="d-flex" onSubmit={handleSearchSubmit}>
-            <input
-              className="form-control me-2"
-              type="search"
-              placeholder="Search"
-              aria-label="Search"
-              value={search}
-              onChange={handleInputChange}
-            />
-            <button className="btn btn-outline-success text-color-white" type="submit">Search</button>
-          </form> */}
           <Link to="/signup" className="btn btn-outline-success me-2 text-color-white">Sign Up</Link>
           <Link to="/login" className="btn btn-outline-success text-color-white">Login</Link>
         </div>
