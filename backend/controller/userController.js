@@ -64,7 +64,8 @@ const userSignUp = async (req, res) => {
                     message: message.errorMessage.userExists,
                 });
             } else {
-                
+                datas["password"] = hashPass;
+                // userContent['user']["password"] = hashPass;
                 userContent['user'].push(datas);
                 commonFun.writeFile(filePath, userContent)
                     .then((userData) => {

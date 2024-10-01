@@ -8,13 +8,7 @@ import App from './App';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <>
-    <ToastContainer 
-      theme='red'
-      position="bottom-right"
-      autoClose={3000}
-      closeOnClick
-      pauseOnHover={false}
-    />
     <App />
+    <ToastContainer />
   </>
 );

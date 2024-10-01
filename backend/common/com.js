@@ -29,7 +29,7 @@ const readFile = (Filename) => {
 
 const isStrongPassword = (password) => {
 
-    strongPasswordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    const strongPasswordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
     if (strongPasswordPattern.test(password)) {
         return true;
     } else {

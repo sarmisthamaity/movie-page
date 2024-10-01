@@ -5,7 +5,7 @@ const MovieList = ({ movies }) => {
   
   return (
     <div className="movie-grid">
-      {movies.map((movie) => {        
+      {Array.isArray(movies) && movies.length > 0 ? movies.map((movie) => {        
         return(
           <div key={movie.title} className="movie-card">
           <img src={movie.poster} alt={movie.title} />
@@ -15,7 +15,7 @@ const MovieList = ({ movies }) => {
           <p>Genres: {movie.genres}</p>
         </div>
         )
-      })}
+      }): <p style={{textAlign: "center", }}>Movie Not Found</p>}
     </div>
   );
 };

@@ -2,41 +2,41 @@ import React, { useState } from 'react';
 import movies from "../data/movies.json";
 import MovieList from '../components/MovieList';
 import Filter from '../components/Filter';
-import Pagination from "../components/Pagination"
+import Pagination from "../components/Pagination";
+import Carousel from "../components/Carousel";
 
 const Home = () => {
   const [filteredMovies, setFilteredMovies] = useState(movies);
   const [currentPage, setCurrentPage] = useState(1);
   const [moviesPerPage] = useState(4);
-
+  const [show, setIsShow] = useState("");
+  const [genere, setGenere] = useState("");
+  
   const handleFilter = (filters) => {
-    // console.log("filters in home jsx file", typeof filters.rating);
     
     let updatedMovies = movies;
     if (filters.genre) {
-      updatedMovies = updatedMovies.filter(movie =>
-        movie.genres.includes(filters.genre)
-      );
+      setIsShow(filters.genre);
+      setGenere(filters.genre);
     }
 
     if (filters.releaseYear) {
+      setIsShow("");
       updatedMovies = updatedMovies.filter(movie =>{
         return movie.release_year === filters.releaseYear;
       });
     }
 
     if (filters.rating) {
-      // console.log("hello world");
+      setIsShow("");
       
-      updatedMovies = updatedMovies.filter(movie =>{
-        // console.log(typeof movie.imdb_rating, "movie.imdb_rating", movie.imdb_rating);
-        // console.log(typeof filters.rating, "filters.rating", filters.rating);
-        
+      updatedMovies = updatedMovies.filter(movie =>{        
         return movie.imdb_rating >= filters.rating;
       });
     }
 
     if(filters.title) {
+      setIsShow("");
       
       updatedMovies = movies.filter((movie) => {        
         const movieTitle = typeof movie.title === "string" ? movie.title.trim() : "";
@@ -44,18 +44,12 @@ const Home = () => {
         if(movieTitle.includes(filterTitle)) {
           return movieTitle.includes(filterTitle);
         }
-        // return movieTitle === filterTitle;
       });
-      // console.log("updatedMovies", updatedMovies);      
     }
 
     setFilteredMovies(updatedMovies);
   };
 
-  
-  // console.log("filteredMovies", filteredMovies);
-  
-  // Pagination Logic  
   let indexOfLastMovie = currentPage * moviesPerPage;
   let indexOfFirstMovie = indexOfLastMovie - moviesPerPage;  
   let currentMovies = filteredMovies.slice(indexOfFirstMovie, indexOfLastMovie);
@@ -63,17 +57,18 @@ const Home = () => {
   if(currentMovies.length === 0) {
     currentMovies = filteredMovies;
   }
-  
-  // console.log("currentMovies", currentMovies);
-  
+    
   const paginate = (pageNumber) => {    
     setCurrentPage(pageNumber);
 
   };
 
+  // console.log(show, "hello world >>>>>>>>>>>>>>");
+  
+
   return (
     <div>
-      <Filter onFilter={handleFilter}/>
+      <Filter onFilter={handleFilter} />
       <MovieList movies={currentMovies} />
       <Pagination
         moviesPerPage={moviesPerPage}
@@ -81,6 +76,7 @@ const Home = () => {
         paginate={paginate}
         currentPage={currentPage}
       />
+      {show ? <Carousel show={show} movies={movies} genere={genere}/> : <></>}
     </div>
   );
 };

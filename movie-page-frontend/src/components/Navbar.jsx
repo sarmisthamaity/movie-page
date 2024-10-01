@@ -2,7 +2,14 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import "../css/navbar.css";
 
-const Navbar = () => {
+const Navbar = () => {  
+
+  const checkAuth = localStorage.getItem("token");
+  const logOut = () => {
+    const token = localStorage.removeItem("token");
+    window.location.reload();
+    return token;
+  }
 
   return (
 
@@ -17,8 +24,16 @@ const Navbar = () => {
               <Link to="/" className="nav-link text-color-white active">Home</Link>
             </li>
           </ul>
-          <Link to="/signup" className="btn btn-outline-success me-2 text-color-white">Sign Up</Link>
-          <Link to="/login" className="btn btn-outline-success text-color-white">Login</Link>
+          {!checkAuth ?
+            <>
+              <Link to="/signup" className="btn btn-outline-success me-2 text-color-white">Sign Up</Link>
+            </>
+
+            : <>
+              <Link to="/login" className="btn btn-outline-success me-2 text-color-white">Login</Link>
+              <Link to="/signup" className="btn btn-outline-success text-color-white" onClick={logOut}>Logout</Link>
+            </>}
+
         </div>
       </div>
     </nav>

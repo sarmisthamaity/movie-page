@@ -17,6 +17,7 @@ const Filter = ({ onFilter }) => {
   };
 
   const handleYearChange = (e) => {
+
     setFilters({
       ...filters,
       releaseYear: parseInt(e.target.value, 10)
@@ -26,8 +27,6 @@ const Filter = ({ onFilter }) => {
       releaseYear: parseInt(e.target.value, 10)
     });
   };
-
-  // console.log("filters", filters);
 
   const handleRatingChange = (e) => {
 
@@ -44,23 +43,11 @@ const Filter = ({ onFilter }) => {
     });
   };
 
-  const handleMovieTitleChange = (e) => {
-    // console.log(e.target.value, "kkkkkkkkkkkkkkk");
-    
+  const handleMovieTitleChange = (e) => {    
     setSearchInput(e.target.value);
-    // setFilters({
-    //   ...filters,
-    //   title: e.target.value
-    // });
-    // onFilter({
-    //   ...filters,
-    //   title: e.target.value
-    // });
   };
-
-  // console.log("searchInput", searchInput);
   
-  const handleChange = (e) => {
+  const clickOnSearchButton = (e) => {
     e.preventDefault();
 
     setFilters({
@@ -91,7 +78,7 @@ const Filter = ({ onFilter }) => {
       <input type="number" step="0.1" placeholder="Min IMDb Rating" onChange={handleRatingChange} />
 
       <input type="text" onChange={handleMovieTitleChange} placeholder="Search for movies..."/>
-      <button onClick={(e) => handleChange(e)}>click</button>
+      <button onClick={(e) => clickOnSearchButton(e)}>Search</button>
     </div>
   );
 };

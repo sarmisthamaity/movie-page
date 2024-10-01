@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
 import "../css/signup.css";
 
@@ -9,51 +8,50 @@ const Signup = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [emailError, setEmailError] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+  const [passError, setPassError] = useState(false);
   const navigate = useNavigate();
 
+  const validateEmail = (email) => {
+    const re = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    return re.test(String(email).toLowerCase());
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!validateEmail(email)) {
+      setEmailError('Please enter a valid email address');
+      return;
+    }
+    
+    setEmailError('');
     const userData = {
       name,
       email,
       password
     };
 
-    const notify = (message) => toast.success(message);
-
     try {
       const response = await axios.post('http://localhost:3001/api/user/signup', userData);
-      console.log(response.data, "response.data");
-
       if (response.data.status === 200) {
-        console.log("response.data.data.token", response.data.data.token);
+        // console.log("response.data.data.token", response.data.data.token);
 
         setName('');
         setEmail('');
         setPassword('');
-        toast.success(response.data.data.message);
-        // notify(response.data.data.message);
-        // toast.success(response.data.data.message, {
-        //   // position: toast.POSITION.TOP_CENTER,
-        //   autoClose: 3000, //3 seconds
-        //   hideProgressBar: false,
-        //   closeOnClick: true,
-        //   pauseOnHover: true,
-        //   draggable: true,
-        //   // toastId,
-        //   transition: Slide
-        // });
         localStorage.setItem('token', response.data.data.token);
-        // navigate('/login');
-
+        toast.success("Signup successful! 🎉", {
+          onClose: () => navigate('/login')
+        });
       }
     } catch (error) {
-      console.error(error);
-      // toast.error('Cound not fetch nationalities, please try again later', {
-      //   position: toast.POSITION.TOP_RIGHT,
-      // });
+      toast.warning(error.response.data.message, {
+        onClose: () => navigate('/signup')
+      });
+
+      // console.error(error.response.data.message, "llllllllllllllll");
     }
 
   };
@@ -92,6 +90,7 @@ const Signup = () => {
             onChange={(e) => setEmail(e.target.value)}
             required
           />
+          {emailError && <p style={{ color: 'red' }}>{emailError}</p>}
         </div>
 
         <div className="mb-3">
